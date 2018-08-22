@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>预测系统</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/home/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/home/data.js"></script>
+	<script src="resources/scripts/math.min.js"></script>
+	<script src="resources/scripts/compute28.js"></script>
+	<script src="resources/scripts/compute90.js"></script>
+    <script type="text/javascript">
+		function readyToCompute(){
+			var Age = $("input[name='Age']").val();
+			var ALP = $("input[name='ALP']").val();
+			var GGT = $("input[name='GGT']").val();
+			var HBEAG = $("input[name='HBeAg']").val();
+			var HE = $("input[name='HE']:checked").val();
+			var NA = $("input[name='NA']").val();
+			var PTA = $("input[name='PTA']").val();
+			var TBIL = $("input[name='TBIL']").val();
+			
+			var regExp = /^\d+(\.\d+)?$/;  
+			if((Age!=null&&Age!=""&&!regExp.test(Age))||
+			   (ALP!=null&&ALP!=""&&!regExp.test(ALP))||
+			   (GGT!=null&&GGT!=""&&!regExp.test(GGT))||
+			   (HBEAG!=null&&HBEAG!=""&&!regExp.test(HBEAG))||
+			   (NA!=null&&NA!=""&&!regExp.test(NA))||
+			   (PTA!=null&&PTA!=""&&!regExp.test(PTA))||
+			   (TBIL!=null&&TBIL!=""&&!regExp.test(TBIL))){
+				$("#errorMsg").html("请输入正确参数！");
+				return;
+			}else{
+				$("#errorMsg").html("");
+			}
+			
+			var paramCount = 0;
+			if(Age!=""&&Age!=null){
+				paramCount++;
+			}
+			if(ALP!=""&&ALP!=null){
+				paramCount++;		
+			}
+			if(GGT!=""&&GGT!=null){
+				paramCount++;	
+			}
+			if(HBEAG!=""&&HBEAG!=null){
+				paramCount++;	
+			}
+			if(NA!=""&&NA!=null){
+				paramCount++;
+			}
+			if(PTA!=""&&PTA!=null){
+				paramCount++;	
+			}
+			if(TBIL!=""&&TBIL!=null){
+				paramCount++;	
+			}
+			
+			if(paramCount>1){
+				//compute
+				var result28 = compute28(Age,ALP,GGT,HBEAG,HE,NA,PTA,TBIL);
+				var result90 = compute90(Age,ALP,GGT,HBEAG,HE,NA,PTA,TBIL);
+				//alert(result28+"\n"+result90);
+				result28 = result28.toFixed(3);
+				result90 = result90.toFixed(3);
+				
+				//28天预测结果
+				if(result28>0&&result28<=0.4){
+					//blue
+					$("#result28").attr("style","width:"+result28*100+"%;background:#1E90FF;");
+				}else if(result28>0.4&&result28<=0.7){
+					//yellow
+					$("#result28").attr("style","width:"+result28*100+"%;background:#FFD700;");
+				}else if(result28>0.7&&result28<=1){
+					//red
+					$("#result28").attr("style","width:"+result28*100+"%;background:#FF0000;");
+				}
+				$("#result28_value").html(result28);
+				
+				//90天预测结果
+				if(result90>0&&result90<=0.4){
+					//blue
+					$("#result90").attr("style","width:"+result90*100+"%;background:#1E90FF;");
+				}else if(result90>0.4&&result90<=0.7){
+					//yellow
+					$("#result90").attr("style","width:"+result90*100+"%;background:#FFD700;");
+				}else if(result90>0.7&&result90<=1){
+					//red
+					$("#result90").attr("style","width:"+result90*100+"%;background:#FF0000;");
+				}
+				$("#result90_value").html(result90);
+			}else{
+				$("#errorMsg").html("至少输入三个参数！");
+			}
+		}
+    </script>
+	
+	<style type="text/css">
+		
+        
+        .Bar div{ display: block; position: relative;
+            /*background:peachpuff; 进度条背景颜色 color: #333333;*/ 
+            height: 20px; /* 高度 */ line-height: 20px;
+            /* 必须和高度一致，文本才能垂直居中 */ }
+		.Bar div span{ position: absolute; width: 300px;
+            /* 宽度 */ text-align: center; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u0" class="ax_default box_1">
+        <div id="u0_div" class=""></div>
+      </div>
+	  
+	  <!-- Unnamed (Rectangle) -->
+      <div id="u21" class="ax_default heading_3">
+        <div id="u21_div" class=""></div>
+        <div id="u21_text" class="text ">
+          <p><span>慢加急性肝衰竭预后预测系统</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u6" class="ax_default heading_1">
+        <div id="u6_div" class=""></div>
+        <div id="u6_text" class="text ">
+          <p><span>Age:</span></p>
+        </div>
+      </div>
+	  
+	  <!-- Unnamed (Text Field) -->
+      <div id="u2" class="ax_default text_field">
+        <input id="u2_input" name="Age" type="text" value="" />
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u7" class="ax_default heading_1">
+        <div id="u7_div" class=""></div>
+        <div id="u7_text" class="text ">
+          <p><span>ALP:</span></p>
+        </div>
+      </div>
+	  
+	  <!-- Unnamed (Text Field) -->
+      <div id="u3" class="ax_default text_field">
+        <input id="u3_input" name="ALP" type="text" value="" />
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u8" class="ax_default heading_1">
+        <div id="u8_div" class=""></div>
+        <div id="u8_text" class="text ">
+          <p><span>GGT:</span></p>
+        </div>
+      </div>
+	  
+	  <!-- Unnamed (Text Field) -->
+      <div id="u4" class="ax_default text_field">
+        <input id="u4_input" name="GGT" type="text" value="" />
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u9" class="ax_default heading_1">
+        <div id="u9_div" class=""></div>
+        <div id="u9_text" class="text ">
+          <p><span>HBeAg:</span></p>
+        </div>
+      </div>
+	  
+	  <!-- Unnamed (Text Field) -->
+      <div id="u5" class="ax_default text_field">
+        <input id="u5_input" name="HBeAg" type="text" value="" />
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u10" class="ax_default heading_1">
+        <div id="u10_div" class=""></div>
+        <div id="u10_text" class="text ">
+          <p><span>HE:</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Radio Button) -->
+      <div id="u11" class="ax_default radio_button">
+        <label for="u11_input" style="position: absolute; left: 0px;">
+          <div id="u11_text" class="text">
+            <p><span>是</span></p>
+          </div>
+        </label>
+        <input id="u11_input" type="radio" value="1" name="HE" checked="checked"/>
+      </div>
+
+      <!-- Unnamed (Radio Button) -->
+      <div id="u12" class="ax_default radio_button">
+        <label for="u12_input" style="position: absolute; left: 0px;">
+          <div id="u12_text" class="text ">
+            <p><span>否</span></p>
+          </div>
+        </label>
+        <input id="u12_input" type="radio" value="0" name="HE"/>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u14" class="ax_default heading_1">
+        <div id="u14_div" class=""></div>
+        <div id="u14_text" class="text ">
+          <p><span>NA：</span></p>
+        </div>
+      </div>
+	  
+	  <!-- Unnamed (Text Field) -->
+      <div id="u13" class="ax_default text_field">
+        <input id="u13_input" name="NA" type="text" value="" />
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u16" class="ax_default heading_1">
+        <div id="u16_div" class=""></div>
+        <div id="u16_text" class="text ">
+          <p><span>PTA:</span></p>
+        </div>
+      </div>
+	  
+	  <!-- Unnamed (Text Field) -->
+      <div id="u15" class="ax_default text_field">
+        <input id="u15_input" name="PTA" type="text" value="" />
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u18" class="ax_default heading_1">
+        <div id="u18_div" class=""></div>
+        <div id="u18_text" class="text ">
+          <p><span>TBIL:</span></p>
+        </div>
+      </div>
+	  
+	  <!-- Unnamed (Text Field) -->
+      <div id="u17" class="ax_default text_field">
+        <input id="u17_input" name="TBIL" type="text" value="" />
+      </div>
+	  
+	  <!-- Unnamed (Rectangle) -->
+      <div id="u25" class="ax_default heading_1">
+        <div id="u25_div" class=""></div>
+        <div id="u25_text" class="text ">
+          <p><span id="errorMsg" style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+		  font-weight:700; color: red;"></span></p>
+        </div>
+      </div>
+	  
+	  <!-- Unnamed (Rectangle) -->
+      <div id="u1" class="ax_default primary_button">
+        <div id="u1_div" class=""></div>
+        <div id="u1_text" class="text " onclick="readyToCompute()" style="cursor:pointer">
+          <p><span>计算</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u22" class="ax_default heading_1">
+        <div id="u22_div" class=""></div>
+        <div id="u22_text" class="text ">
+          <p><span>28天死亡率:</span></p>
+        </div>
+      </div>
+	  
+	  <!-- Unnamed (Shape)<div id="u19" class="ax_default icon">
+        <img id="u19_img" class="img " src="images/home/u19.png"/>
+      </div> -->
+      
+	  <div id="u19" class="Bar">
+        <div id="result28" style="width:0;background:#FFD700;">
+			<span id="result28_value"></span>
+        </div>
+	  </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u23" class="ax_default heading_1">
+        <div id="u23_div" class=""></div>
+        <div id="u23_text" class="text ">
+          <p><span>90天死亡率:</span></p>
+        </div>
+      </div>
+	  
+	  <!-- Unnamed (Shape) <div id="u20" class="ax_default icon">
+        <img id="u20_img" class="img " src="images/home/u20.png"/>
+      </div>-->
+      
+	  <div id="u20" class="Bar">
+        <div id="result90" style="width:0%;background:#FFD700;">
+			<span id="result90_value"></span>
+        </div>
+	  </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u24" class="ax_default heading_1">
+        <div id="u24_div" class=""></div>
+        <div id="u24_text" class="text ">
+          <p><span>版权：北京地坛医院-中西医结合中心</span></p>
+        </div>
+      </div>
+	  
+    </div>
+  </body>
+</html>
