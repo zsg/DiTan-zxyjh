@@ -1,4 +1,4 @@
-﻿body {
+body {
   margin:0px;
   background-image:none;
   position:static;
@@ -152,19 +152,49 @@
   width:300px;
   height:25px;
 }
-#u5_input {
+#u11_HBeAg {
+  border-width:0px;
   position:absolute;
-  left:0px;
+  left:412px;
+  top:265px;
+  width:100px;
+  height:16px;
+}
+#u11_text_HBeAg {
+  border-width:0px;
+  position:absolute;
+  left:16px;
   top:0px;
-  width:300px;
-  height:25px;
-  font-family:'Arial Normal', 'Arial';
-  font-weight:400;
-  font-style:normal;
-  font-size:13px;
-  text-decoration:none;
-  color:#000000;
-  text-align:center;
+  width:82px;
+  word-wrap:break-word;
+}
+#u11_input_HBeAg {
+  border-width:0px;
+  position:absolute;
+  left:-3px;
+  top:-2px;
+}
+#u12_HBeAg {
+  border-width:0px;
+  position:absolute;
+  left:544px;
+  top:265px;
+  width:100px;
+  height:16px;
+}
+#u12_text_HBeAg {
+  border-width:0px;
+  position:absolute;
+  left:16px;
+  top:0px;
+  width:82px;
+  word-wrap:break-word;
+}
+#u12_input_HBeAg {
+  border-width:0px;
+  position:absolute;
+  left:-3px;
+  top:-2px;
 }
 #u6_div {
   border-width:0px;
